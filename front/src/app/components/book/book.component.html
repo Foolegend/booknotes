@@ -1,0 +1,87 @@
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav mode="side" [ngStyle]="{'width.em': 10}" opened="true" #sidenav>
+    <button mat-button (click)="changeOpen()" >
+      <mat-icon>{{arrow}}</mat-icon>
+      书编号信息</button>
+    <div *ngFor="let bookinfoList of groupBookinfolist;let i=index;"> 
+       <button *ngIf="isOpen" (click)="changeGroupOpen(i);"
+          title="{{bookinfoList.name}}" mat-button>
+        &nbsp;&nbsp;<mat-icon>{{arrowGroup[i]}}</mat-icon>  
+       {{bookinfoList.name}}</button> 
+       <div *ngFor="let bookinfo of bookinfoList.bookInfos;"> 
+        <button *ngIf="isOpen && isGroupOpen[i]" (click)="setBookInfo(bookinfo);state=bookinfo.id;"
+          [ngClass]="{'active':state==bookinfo.id}" title="{{bookinfo.name}}" mat-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;<mat-icon>keyboard_arrow_right</mat-icon>  
+        {{bookinfo.name}}</button> 
+      </div>
+     </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <div *ngIf="isadd==false;then modifyinfo else addinfo"></div>
+      
+      <ng-template #modifyinfo>
+          <div *ngIf="bookInfo"  fxLayout="column" fxLayoutAlign="space-between center">
+              <form [formGroup]="myForm" (ngSubmit)="modifyBookInfo(myForm.value)">
+                <tr>
+                    <td><label for="id">编号:</label></td>
+                    <td><input type="text" readonly="readonly" id="id" placeholder="{{bookInfo.id}}" [(ngModel)]="bookInfo.id" [formControl]="myForm.controls['id']"></td>
+                </tr>
+                <tr>
+                    <td><label for="name">书名:</label></td>
+                    <td><input type="text" id="name" placeholder="{{bookInfo.name}}" [(ngModel)]="bookInfo.name" [formControl]="myForm.controls['name']"></td>
+               </tr>
+                <tr>
+                  <td><label for="author">作者:</label></td>
+                  <td><input type="text" id="author" placeholder="{{bookInfo.author}}" [(ngModel)]="bookInfo.author" [formControl]="myForm.controls['author']"></td>
+                </tr>
+                <tr>
+                    <td><label for="price">价格:</label></td>
+                    <td><input type="text" id="price" placeholder="{{bookInfo.price}}" [(ngModel)]="bookInfo.price" [formControl]="myForm.controls['price']"></td>
+                  </tr>
+                <tr>
+                 <td>
+                    <button type="submit">修改</button>
+                 </td>
+                 <td>
+                    <button type="button" (click)="deleteBookInfo(bookInfo.id)">删除</button>
+                 </td>
+                </tr>
+              </form>
+            </div>
+      </ng-template>
+      <ng-template #addinfo>
+          <div fxLayout="column" fxLayoutAlign="space-between center">
+              <form [formGroup]="myForm" (ngSubmit)="addBookInfo(myForm.value)">
+                <tr>
+                    <td><label for="id">编号:</label></td>
+                    <td><input type="text" id="id" placeholder="{{newBookInfo.id}}"  [(ngModel)]="newBookInfo.id" [formControl]="myForm.controls['id']" ></td>
+                </tr>
+                <tr>
+                    <td><label for="name">书名:</label></td>
+                    <td><input type="text" id="name" placeholder="{{newBookInfo.name}}"  [(ngModel)]="newBookInfo.name" [formControl]="myForm.controls['name']"></td>
+                </tr>
+                <tr>
+                  <td><label for="author">作者:</label></td>
+                  <td><input type="text" id="author" placeholder="{{newBookInfo.author}}"  [(ngModel)]="newBookInfo.author" [formControl]="myForm.controls['author']"></td>
+                </tr>
+                <tr>
+                    <td><label for="price">价格:</label></td>
+                    <td><input type="text" id="price" placeholder="{{newBookInfo.price}}" [(ngModel)]="newBookInfo.price" [formControl]="myForm.controls['price']"></td>
+                  </tr>
+                <tr>
+                    <button type="submit">新增</button>
+                </tr>
+              </form>
+            </div>
+      </ng-template>
+      
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+  
+
+<mat-menu #mainMenu [overlapTrigger]="false">
+    <ng-template matMenuContent>
+            <button mat-menu-item (click)="add()">新增书</button>
+    </ng-template>
+</mat-menu>

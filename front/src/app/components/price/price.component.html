@@ -1,0 +1,37 @@
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav mode="side" [ngStyle]="{'width.em': 10}" opened="true" #sidenav>
+    <button mat-button (click)="changeOpen()" >
+      <mat-icon>{{arrow}}</mat-icon>
+      书编号信息</button>
+    <div *ngFor="let bookinfoList of groupBookinfolist;let i=index;"> 
+       <button *ngIf="isOpen" (click)="changeGroupOpen(i);"
+          title="{{bookinfoList.name}}" mat-button>
+        &nbsp;&nbsp;<mat-icon>{{arrowGroup[i]}}</mat-icon>  
+       {{bookinfoList.name}}</button> 
+       <div *ngFor="let bookinfo of bookinfoList.bookInfos;"> 
+        <button *ngIf="isOpen && isGroupOpen[i]" (click)="setBookInfo(bookinfo);state=bookinfo.id;"
+          [ngClass]="{'active':state==bookinfo.id}" title="{{bookinfo.name}}" mat-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;<mat-icon>keyboard_arrow_right</mat-icon>  
+        {{bookinfo.name}}</button> 
+      </div>
+     </div>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+      <div id="div4" *ngIf="bookInfo" >
+        <li>{{bookInfo.Id}}</li> 
+        <li>{{bookInfo.name}}</li> 
+        <li>{{bookInfo.price}}</li> 
+      </div>
+      <!-- <button [matMenuTriggerFor]="myMenu">Trigger 1</button>
+      <mat-menu #myMenu [overlapTrigger]="false">
+        <button mat-menu-item>This is Menu 1 (overlap = false)</button>
+      </mat-menu>
+    
+      <div style="height: 100px"></div>
+    
+      <button [matMenuTriggerFor]="myMenu1">Trigger 2</button>
+      <mat-menu #myMenu1 myMenu [overlapTrigger]="true">
+        <button mat-menu-item>This is Menu 2 (overlap = true)</button>
+      </mat-menu> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
