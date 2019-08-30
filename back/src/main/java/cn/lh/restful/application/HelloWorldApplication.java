@@ -28,16 +28,7 @@ public class HelloWorldApplication  extends Application<HelloWorldConfiguration>
     public void run(HelloWorldConfiguration configuration, Environment environment) throws Exception {
         //声明一个resource，并传入初始化的值，该值由configuration读取的yml配置文件中的值。
         //可以启动多个resource
-        final BookInfoResource resource = new BookInfoResource(
-                configuration.getTemplate(),
-                configuration.getDefaultName()
-        );
-
-        //声明一个检查点，让其进行检查该模板的正确性。
-        final TemplateHealthCheck healthCheck =
-                new TemplateHealthCheck(configuration.getTemplate());
-        environment.healthChecks().register("template", healthCheck);
-
+        final BookInfoResource resource = new BookInfoResource();
 
         environment.jersey().register(resource);
     }

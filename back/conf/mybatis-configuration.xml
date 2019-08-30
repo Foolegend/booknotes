@@ -19,8 +19,8 @@
             <transactionManager type="JDBC"/>
             <!--dataSource 元素使用标准的 JDBC 数据源接口来配置 JDBC 连接对象源  -->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/bookdata?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+                <property name="url" value="jdbc:derby:/home/liguofa/derby/book;create=false;&amp;characterEncoding=utf8"/>
                 <property name="username" value="book"/>
                 <property name="password" value="book"/>
             </dataSource>

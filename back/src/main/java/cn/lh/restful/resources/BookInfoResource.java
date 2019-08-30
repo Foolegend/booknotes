@@ -22,14 +22,8 @@ import java.util.concurrent.atomic.AtomicLong;
 @Produces(MediaType.APPLICATION_JSON)//返回的数据类型
 public class BookInfoResource {
 
-    private final String template;
-    private final String defaultName;
-    private final AtomicLong counter;
 
-    public BookInfoResource(String template, String defaultName) {
-        this.template = template;
-        this.defaultName = defaultName;
-        this.counter = new AtomicLong();
+    public BookInfoResource() {
     }
 
     /**
