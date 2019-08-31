@@ -26,6 +26,7 @@
     "@angular/router": "^7.2.12",
     "angular2-contextmenu": "^0.8.2",
     "core-js": "^2.5.7",
+    "ng-circle-progress": "^1.5.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "typescript": "^3.2.4"

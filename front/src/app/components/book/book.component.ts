@@ -25,8 +25,8 @@ export class BookComponent implements OnInit {
   isGroupOpen: Boolean[] = new Array<Boolean>();
   arrow: String="keyboard_arrow_down";
   arrowGroup: String[] = new Array<String>();
-
- 
+  typesOfModule: String[]=["ceshi", "lishi", "hehe","budong","qiguai"];
+  precent: number[] = new Array<number>();
 
   constructor(private http: Http, fb: FormBuilder,private router: Router, private bookInfoService: BookInfoService) {
     this.myForm = fb.group({
@@ -130,5 +130,31 @@ export class BookComponent implements OnInit {
     }else{
       this.arrowGroup[i] = "keyboard_arrow_right";
     }
+  }
+
+  getShowPercent(i : any){
+    var per = this.precent[i];
+  
+    if(per){
+      return per;
+    }
+    console.log("per=" + per + ",i=" + i)
+    return 0;
+  }
+  getCircleSubtitle(i:any){
+    if(this.precent[i] == 100){
+      return "下载成功."
+    }else{
+      return this.typesOfModule[i];
+    }
+  }
+  process(i:any){
+    this.precent[i]=0;
+    for(var k=0; k<100; k++){
+      for(var j=0; j < 100; j++){
+        console.log(j)
+      }
+      this.precent[i]=this.precent[i] + 1;
+    } 
   }
 }
