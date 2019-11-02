@@ -1,8 +1,11 @@
 <mat-sidenav-container fxFlexFill>
-  <mat-sidenav mode="side" [ngStyle]="{'width.em': 10}" opened="true" #sidenav>
+<mat-sidenav mode="side" [ngStyle]="{'width.em': 20}" opened="true" #sidenav>
     <button mat-button (click)="changeOpen()" >
-      <mat-icon>{{arrow}}</mat-icon>
-      书编号信息</button>
+      <mat-icon>{{arrow}}</mat-icon>书签信息</button>
+      <button mat-icon-button title="增加子节点" (click)="addSubNode()" >
+        <mat-icon>add</mat-icon></button>
+      <button mat-icon-button title="删除节点" (click)="deleteNodes()" >
+          <mat-icon>remove</mat-icon></button>
     <div *ngFor="let bookinfoList of groupBookinfolist;let i=index;"> 
        <button *ngIf="isOpen" (click)="changeGroupOpen(i);"
           title="{{bookinfoList.name}}" mat-button>
@@ -17,16 +20,7 @@
      </div>
   </mat-sidenav>
   <mat-sidenav-content>
-      <mat-tab-group>
-          <mat-tab *ngFor="let types of typesOfModule;let i=index" label = "{{types}}"> 
-              <circle-progress [percent]="getShowPercent(i)"
-              [subtitle]="getCircleSubtitle(i)">
-              </circle-progress>
-              <button (click)="process(i)">{{types}}</button>
-          </mat-tab>
-       </mat-tab-group>
       <div *ngIf="isadd==false;then modifyinfo else addinfo"></div>
-      
       <ng-template #modifyinfo>
           <div *ngIf="bookInfo"  fxLayout="column" fxLayoutAlign="space-between center">
               <form [formGroup]="myForm" (ngSubmit)="modifyBookInfo(myForm.value)">
@@ -82,14 +76,5 @@
               </form>
             </div>
       </ng-template>
-      
     </mat-sidenav-content>
-</mat-sidenav-container>
-
-  
-
-<mat-menu #mainMenu [overlapTrigger]="false">
-    <ng-template matMenuContent>
-            <button mat-menu-item (click)="add()">新增书</button>
-    </ng-template>
-</mat-menu>
+  </mat-sidenav-container>

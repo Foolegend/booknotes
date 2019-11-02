@@ -3,15 +3,15 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { BookInfoService } from '../book-info.service';
+import { BookInfoService } from '../../book-info.service';
 
 @Component({
   selector: 'app-book',
-  templateUrl: './book.component.html',
-  styleUrls: ['./book.component.css'],
+  templateUrl: './booknotes.component.html',
+  styleUrls: ['./booknotes.component.css'],
   
 })
-export class BookComponent implements OnInit {
+export class BookNotesComponent implements OnInit {
   @ViewChild('matMenuTrigger') mainMenu: MatMenuTrigger;
 
   myForm: FormGroup;
@@ -85,7 +85,7 @@ export class BookComponent implements OnInit {
     this.mainMenu.openMenu(); // Open your custom context menu instead
   }
   
-  add(){
+  addSubNode(){
     this.isadd = true;
   }
 

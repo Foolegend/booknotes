@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, MatTabsModule } from '@angular/material';
+import { MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
-import { BookComponent } from './book.component';
+import { BookNotesComponent } from './booknotes/booknotes.component';
 import {FlexLayoutModule} from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BookInfoService } from '../book-info.service';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 const routes: Routes = [
-  {path:'', component: BookComponent, 
+  {path:'', component: BookNotesComponent, 
     children:[
       // {path:'order', component: OrderComponent},
       // {path:'revoke',component: RevokeComponent}
@@ -27,24 +26,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    MatMenuModule,
     HttpModule,
-    NgCircleProgressModule.forRoot({
-      // set defaults here
-      radius: 100,
-      outerStrokeWidth: 10,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#78C000",
-      innerStrokeColor: "#C7E596",
-      animationDuration: 1000,
-      animation:false,
-      showUnits:true,
-      title:"auto",
-      maxPercent:100
-    }),
-    MatTabsModule,
   ],
   providers:[BookInfoService],
-  declarations: [BookComponent]
+  declarations: [BookNotesComponent]
 })
 export class BookModule { }

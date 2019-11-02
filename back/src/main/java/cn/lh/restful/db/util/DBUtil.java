@@ -18,9 +18,7 @@ public class DBUtil {
             Statement stat = conn.createStatement();
             if (!isBookSchemaExists(conn)) {
                 System.out.println("创建数据开始");
-                System.out.println("书分组表信息");
-                stat.execute(DBSqlConst.CREATE_BOOKGROUP_SQL);
-                System.out.println("创建书表信息");
+                System.out.println("创建书签信息");
                 stat.execute(DBSqlConst.CREATE_BOOK_SQL);
                 System.out.println("创建数据库结束");
             }

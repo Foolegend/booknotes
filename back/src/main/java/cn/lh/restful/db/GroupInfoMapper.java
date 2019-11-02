@@ -16,7 +16,7 @@ public interface GroupInfoMapper {
     @Results({@Result(property = "id", column = "id"),
             @Result(property="bookInfos",column="id",many=@Many(select="cn.lh.restful.db.BookInfoMapper.getBookInfosByGroupid"))
     })
-    @Select("select * from  bookgroup")
+    @Select("select * from  book")
     public List<GroupBookInfo> getGroupInfos();
 
     @Update("update bookgroup set name=#{name} where id = #{id}")
