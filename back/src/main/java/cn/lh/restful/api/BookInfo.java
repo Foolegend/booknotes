@@ -1,5 +1,7 @@
 package cn.lh.restful.api;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class BookInfo {
@@ -8,6 +10,9 @@ public class BookInfo {
     private String author;
     private  String price;
     private String  groupid;
+    private int level = 0;
+    private List<BookInfo> bookInfos = new ArrayList<BookInfo>();
+
 
     public String getId() {
         return id;
@@ -49,12 +54,33 @@ public class BookInfo {
         this.groupid = groupid;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public List<BookInfo> getBookInfos() {
+        return bookInfos;
+    }
+
+    public void setBookInfos(List<BookInfo> bookInfos) {
+        this.bookInfos = bookInfos;
+    }
+
+    public void addBookInfo(BookInfo bookInfo){
+        this.bookInfos.add(bookInfo);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof BookInfo)) return false;
         BookInfo bookInfo = (BookInfo) o;
-        return Objects.equals(id, bookInfo.id) &&
+        return level == bookInfo.level &&
+                Objects.equals(id, bookInfo.id) &&
                 Objects.equals(name, bookInfo.name) &&
                 Objects.equals(author, bookInfo.author) &&
                 Objects.equals(price, bookInfo.price) &&
@@ -63,6 +89,6 @@ public class BookInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, author, price, groupid);
+        return Objects.hash(id, name, author, price, groupid, level);
     }
 }

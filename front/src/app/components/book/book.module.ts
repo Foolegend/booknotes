@@ -7,6 +7,7 @@ import {FlexLayoutModule} from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BookInfoService } from '../book-info.service';
+import { BooktreeComponent } from './booktree/booktree.component';
 const routes: Routes = [
   {path:'', component: BookNotesComponent, 
     children:[
@@ -29,6 +30,6 @@ const routes: Routes = [
     HttpModule,
   ],
   providers:[BookInfoService],
-  declarations: [BookNotesComponent]
+  declarations: [BookNotesComponent, BooktreeComponent]
 })
 export class BookModule { }

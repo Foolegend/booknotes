@@ -1,10 +1,11 @@
 package cn.lh.restful.db.util;
 
 public class DBSqlConst {
-    public final static String CREATE_BOOK_SQL = "create table book(" +
-            "id varchar(200) primary key, " +
-            "name varchar(2000)," +
-            "author varchar(200)," +
-            "price  varchar(200)," +
-            "groupid varchar(200))";
+    public final static String CREATE_BOOK_SQL = "CREATE TABLE BOOK(" +
+            "ID VARCHAR(200) PRIMARY KEY, " +
+            "NAME VARCHAR(2000)," +
+            "AUTHOR VARCHAR(200)," +
+            "PRICE  VARCHAR(200)," +
+            "GROUPID VARCHAR(200)," +
+            "LEVEL  INTEGER)";
 }

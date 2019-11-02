@@ -1,23 +1,12 @@
 <mat-sidenav-container fxFlexFill>
-<mat-sidenav mode="side" [ngStyle]="{'width.em': 20}" opened="true" #sidenav>
+  <mat-sidenav mode="side" [ngStyle]="{'width.em': 20}" opened="true" #sidenav>
     <button mat-button (click)="changeOpen()" >
       <mat-icon>{{arrow}}</mat-icon>书签信息</button>
       <button mat-icon-button title="增加子节点" (click)="addSubNode()" >
         <mat-icon>add</mat-icon></button>
       <button mat-icon-button title="删除节点" (click)="deleteNodes()" >
           <mat-icon>remove</mat-icon></button>
-    <div *ngFor="let bookinfoList of groupBookinfolist;let i=index;"> 
-       <button *ngIf="isOpen" (click)="changeGroupOpen(i);"
-          title="{{bookinfoList.name}}" mat-button>
-        &nbsp;&nbsp;<mat-icon>{{arrowGroup[i]}}</mat-icon>  
-       {{bookinfoList.name}}</button> 
-       <div *ngFor="let bookinfo of bookinfoList.bookInfos;"> 
-        <button *ngIf="isOpen && isGroupOpen[i]" (click)="setBookInfo(bookinfo);state=bookinfo.id;"
-          [ngClass]="{'active':state==bookinfo.id}" title="{{bookinfo.name}}" mat-button>
-          &nbsp;&nbsp;&nbsp;&nbsp;<mat-icon>keyboard_arrow_right</mat-icon>  
-        {{bookinfo.name}}</button> 
-      </div>
-     </div>
+        <app-booktree  [bookinfolist]="groupBookinfolist"></app-booktree>
   </mat-sidenav>
   <mat-sidenav-content>
       <div *ngIf="isadd==false;then modifyinfo else addinfo"></div>

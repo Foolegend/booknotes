@@ -1,8 +1,6 @@
 package cn.lh.restful.db;
 
 import cn.lh.restful.api.BookInfo;
-import cn.lh.restful.api.GroupBookInfo;
-import cn.lh.restful.api.GroupInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -29,15 +27,6 @@ public class DbDaoService {
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     }
 
-
-    public static List<GroupBookInfo> getGroupBookInfos(){
-        openSession(sqlSessionFactory);
-        GroupInfoMapper mapper = session.getMapper(GroupInfoMapper.class);
-        //返回书列表
-        List<GroupBookInfo> groupBookInfos = mapper.getGroupInfos();
-        closeSession();
-        return groupBookInfos;
-    }
 
     public static BookInfo getBookInfo(String id){
         openSession(sqlSessionFactory);
@@ -82,5 +71,12 @@ public class DbDaoService {
         session.close();
     }
 
-
+    public static List<BookInfo> getBookInfos(){
+        openSession(sqlSessionFactory);
+        BookInfoMapper mapper = session.getMapper(BookInfoMapper.class);
+        //返回书列表
+        List<BookInfo> bookInfos = mapper.getBookInfos();
+        closeSession();
+        return bookInfos;
+    }
 }

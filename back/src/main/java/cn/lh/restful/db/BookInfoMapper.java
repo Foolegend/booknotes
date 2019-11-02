@@ -9,22 +9,21 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface BookInfoMapper {
-    @Insert("insert into book(id,name,author,price) values(#{id},#{name},#{author},#{price})")
-    public int addBookInfo(BookInfo bookInfo);
-
+    @Insert("insert into book(id,name,author,price, level) values(#{id},#{name},#{author},#{price},#{level})")
+    int addBookInfo(BookInfo bookInfo);
 
     @Select("select * from book where id = #{id}")
-    public BookInfo getBookInfo(String id);
-
-    @Select("select * from book")
-    public List<BookInfo> getBookInfos();
-
-    @Select("select * from book where groupid=#{groupid}")
-    public List<BookInfo> getBookInfosByGroupid(String groupid);
+    BookInfo getBookInfo(String id);
 
     @Update("update book set name=#{name},author=#{author},price=#{price} where id = #{id}")
-    public int updateBookInfo(BookInfo bookInfo);
+    int updateBookInfo(BookInfo bookInfo);
 
     @Delete("delete from book where id=#{id}")
-    public int deleteBookInfo(String id);
+    int deleteBookInfo(String id);
+
+    @Select("select * from  book")
+    List<BookInfo> getBookInfos();
+
+    @Delete("delete from book where groupid=#{groupid}")
+    int deleteBookInfos(String groupid);
 }

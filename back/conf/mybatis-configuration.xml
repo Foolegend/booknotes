@@ -31,6 +31,5 @@
         personMapper.xml位于com.ys.bean这个包下，所以resour
         ce写成com/ys/bean/personMapper.xml-->
         <mapper class="cn.lh.restful.db.BookInfoMapper"/>
-        <mapper class="cn.lh.restful.db.GroupInfoMapper"/>
     </mappers>
 </configuration>
