@@ -7,5 +7,6 @@ public class DBSqlConst {
             "AUTHOR VARCHAR(200)," +
             "PRICE  VARCHAR(200)," +
             "GROUPID VARCHAR(200)," +
-            "LEVEL  INTEGER)";
+            "LEVEL  INTEGER," +
+            "OPENFLAG BOOLEAN)";
 }

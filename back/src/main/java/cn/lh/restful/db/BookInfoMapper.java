@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface BookInfoMapper {
-    @Insert("insert into book(id,name,author,price, groupid, level) values(#{id},#{name},#{author},#{price},#{groupid}, #{level})")
+    @Insert("insert into book(id,name,author,price, groupid, level,openflag) values(#{id},#{name},#{author},#{price},#{groupid}, #{level}, #{openflag})")
     int addBookInfo(BookInfo bookInfo);
 
     @Select("select * from book where id = #{id}")

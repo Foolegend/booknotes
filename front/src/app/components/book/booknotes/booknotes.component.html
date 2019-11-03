@@ -28,7 +28,10 @@
                 <tr>
                     <td><label for="price">价格:</label></td>
                     <td><input type="text" id="price" placeholder="{{bookInfo.price}}" [(ngModel)]="bookInfo.price" [formControl]="bookInfoFormGroup.controls['price']"></td>
-                  </tr>
+                </tr>
+                <tr>
+                    <td><input type="text" id="openflag" placeholder="{{bookInfo.openflag}}" [(ngModel)]="bookInfo.openflag" [formControl]="bookInfoFormGroup.controls['openflag']" hidden="true"></td>
+                </tr>
                 <tr>
                  <td>
                     <button type="submit">修改</button>
@@ -59,6 +62,9 @@
                 <tr>
                  <tr>
                       <td><input type="text" id="groupid" placeholder="{{groupId}}" [(ngModel)]="groupId" [formControl]="bookInfoFormGroup.controls['groupid']" hidden="true"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="openflag" placeholder="{{newBookInfo.openflag}}" [(ngModel)]="newBookInfo.openflag" [formControl]="bookInfoFormGroup.controls['openflag']" hidden="true"></td>
                 </tr>
                     <tr>
                     <button type="submit">新增</button>

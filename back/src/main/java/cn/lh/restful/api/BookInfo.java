@@ -11,6 +11,7 @@ public class BookInfo {
     private  String price;
     private String  groupid;
     private int level = 0;
+    private boolean openflag = false;
     private List<BookInfo> bookInfos = new ArrayList<BookInfo>();
 
 
@@ -74,12 +75,21 @@ public class BookInfo {
         this.bookInfos.add(bookInfo);
     }
 
+    public boolean isOpenflag() {
+        return openflag;
+    }
+
+    public void setOpenflag(boolean openflag) {
+        this.openflag = openflag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof BookInfo)) return false;
         BookInfo bookInfo = (BookInfo) o;
         return level == bookInfo.level &&
+                openflag == bookInfo.openflag &&
                 Objects.equals(id, bookInfo.id) &&
                 Objects.equals(name, bookInfo.name) &&
                 Objects.equals(author, bookInfo.author) &&
@@ -89,6 +99,6 @@ public class BookInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, author, price, groupid, level);
+        return Objects.hash(id, name, author, price, groupid, level, openflag);
     }
 }

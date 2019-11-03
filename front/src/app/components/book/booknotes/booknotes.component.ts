@@ -22,7 +22,6 @@ export class BookNotesComponent implements OnInit {
   headers: Headers;
   options: RequestOptions;
   groupBookinfolist: any[];
-  isOpen: boolean = true;
   arrow: String="keyboard_arrow_down";
   typesOfModule: String[]=["ceshi", "lishi", "hehe","budong","qiguai"];
   precent: number[] = new Array<number>();
@@ -33,7 +32,8 @@ export class BookNotesComponent implements OnInit {
       'id' :'',
       'author':'',
       'price' : '',
-      'groupid':''
+      'groupid':'',
+      'openflag':false
     }); 
     this.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }); 
     this.options = new RequestOptions({ headers: this.headers });
@@ -41,7 +41,8 @@ export class BookNotesComponent implements OnInit {
       'name':'Lu bing xun',
       'id' :'1234',
       'author':'lishi',
-      'price' : '23'
+      'price' : '23',
+      'openflag':true
     };
     this.bookInfoService.getBookInfos().subscribe((res: Response) => {
       console.log(res.json())
@@ -120,15 +121,6 @@ export class BookNotesComponent implements OnInit {
       console.log(responese);
       this.router.navigateByUrl("book");
     });
-  }
-
-  changeOpen(){
-    this.isOpen = !this.isOpen;
-    if(this.isOpen){
-      this.arrow = "keyboard_arrow_down";
-    }else{
-      this.arrow = "keyboard_arrow_right";
-    }
   }
 
   getShowPercent(i : any){

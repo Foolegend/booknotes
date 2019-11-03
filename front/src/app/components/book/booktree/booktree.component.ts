@@ -20,4 +20,23 @@ export class BooktreeComponent implements OnInit {
       // console.log("tree2");
       this.outBookInfo.emit(bookInfo);
     }
+
+    //展开或折叠菜单
+    changeOpen(bookinfo: any){
+      if(bookinfo){
+        bookinfo.openflag = !bookinfo.openflag;
+        var books :any[];
+        books = bookinfo.bookInfos;
+        // console.log(books);
+        if(books && books.length > 0){
+          // console.log(books);
+          for(let book  of books){
+            // console.log("kk")
+            // console.log(book)
+            book.openflag = !book.openflag;
+            this.changeOpen(book);
+          }
+        }
+      }
+    }
 }
