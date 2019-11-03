@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, DoCheck } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -11,7 +11,7 @@ import { BookInfoService } from '../../book-info.service';
   styleUrls: ['./booknotes.component.css'],
   
 })
-export class BookNotesComponent implements OnInit {
+export class BookNotesComponent implements OnInit,  DoCheck {
   @ViewChild('matMenuTrigger') mainMenu: MatMenuTrigger;
 
   bookInfoFormGroup: FormGroup;
@@ -147,5 +147,9 @@ export class BookNotesComponent implements OnInit {
       }
       this.precent[i]=this.precent[i] + 1;
     } 
+  }
+
+  ngDoCheck(){
+    console.log("check");
   }
 }
