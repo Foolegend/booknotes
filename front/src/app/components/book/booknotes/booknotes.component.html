@@ -1,7 +1,7 @@
 <mat-sidenav-container fxFlexFill>
   <mat-sidenav mode="side" [ngStyle]="{'width.em': 20}" opened="true" #sidenav>
-    <button mat-button (click)="changeOpen()" >
-      <mat-icon>{{arrow}}</mat-icon>书签信息</button>
+    <button mat-button (click)="setBookInfo('')" >
+      <mat-icon>library_books</mat-icon>书签信息</button>
       <button mat-icon-button title="增加子节点" (click)="addSubNode()" >
         <mat-icon>add</mat-icon></button>
       <button mat-icon-button title="删除节点" (click)="deleteNodes()" >
@@ -12,29 +12,26 @@
       <div *ngIf="isadd==false;then modifyinfo else addinfo"></div>
       <ng-template #modifyinfo>
           <div *ngIf="bookInfo"  fxLayout="column" fxLayoutAlign="space-between center">
-              <form [formGroup]="myForm" (ngSubmit)="modifyBookInfo(myForm.value)">
+              <form [formGroup]="bookInfoFormGroup" (ngSubmit)="modifyBookInfo(bookInfoFormGroup.value)">
                 <tr>
                     <td><label for="id">编号:</label></td>
-                    <td><input type="text" readonly="readonly" id="id" placeholder="{{bookInfo.id}}" [(ngModel)]="bookInfo.id" [formControl]="myForm.controls['id']"></td>
+                    <td><input type="text" readonly="readonly" id="id" placeholder="{{bookInfo.id}}" [(ngModel)]="bookInfo.id" [formControl]="bookInfoFormGroup.controls['id']"></td>
                 </tr>
                 <tr>
                     <td><label for="name">书名:</label></td>
-                    <td><input type="text" id="name" placeholder="{{bookInfo.name}}" [(ngModel)]="bookInfo.name" [formControl]="myForm.controls['name']"></td>
+                    <td><input type="text" id="name" placeholder="{{bookInfo.name}}" [(ngModel)]="bookInfo.name" [formControl]="bookInfoFormGroup.controls['name']"></td>
                </tr>
                 <tr>
                   <td><label for="author">作者:</label></td>
-                  <td><input type="text" id="author" placeholder="{{bookInfo.author}}" [(ngModel)]="bookInfo.author" [formControl]="myForm.controls['author']"></td>
+                  <td><input type="text" id="author" placeholder="{{bookInfo.author}}" [(ngModel)]="bookInfo.author" [formControl]="bookInfoFormGroup.controls['author']"></td>
                 </tr>
                 <tr>
                     <td><label for="price">价格:</label></td>
-                    <td><input type="text" id="price" placeholder="{{bookInfo.price}}" [(ngModel)]="bookInfo.price" [formControl]="myForm.controls['price']"></td>
+                    <td><input type="text" id="price" placeholder="{{bookInfo.price}}" [(ngModel)]="bookInfo.price" [formControl]="bookInfoFormGroup.controls['price']"></td>
                   </tr>
                 <tr>
                  <td>
                     <button type="submit">修改</button>
-                 </td>
-                 <td>
-                    <button type="button" (click)="deleteBookInfo(bookInfo.id)">删除</button>
                  </td>
                 </tr>
               </form>
@@ -42,26 +39,30 @@
       </ng-template>
       <ng-template #addinfo>
           <div fxLayout="column" fxLayoutAlign="space-between center">
-              <form [formGroup]="myForm" (ngSubmit)="addBookInfo(myForm.value)">
+              <form [formGroup]="bookInfoFormGroup" (ngSubmit)="addBookInfo(bookInfoFormGroup.value)">
                 <tr>
                     <td><label for="id">编号:</label></td>
-                    <td><input type="text" id="id" placeholder="{{newBookInfo.id}}"  [(ngModel)]="newBookInfo.id" [formControl]="myForm.controls['id']" ></td>
+                    <td><input type="text" id="id" placeholder="{{newBookInfo.id}}"  [(ngModel)]="newBookInfo.id" [formControl]="bookInfoFormGroup.controls['id']" ></td>
                 </tr>
                 <tr>
                     <td><label for="name">书名:</label></td>
-                    <td><input type="text" id="name" placeholder="{{newBookInfo.name}}"  [(ngModel)]="newBookInfo.name" [formControl]="myForm.controls['name']"></td>
+                    <td><input type="text" id="name" placeholder="{{newBookInfo.name}}"  [(ngModel)]="newBookInfo.name" [formControl]="bookInfoFormGroup.controls['name']"></td>
                 </tr>
                 <tr>
                   <td><label for="author">作者:</label></td>
-                  <td><input type="text" id="author" placeholder="{{newBookInfo.author}}"  [(ngModel)]="newBookInfo.author" [formControl]="myForm.controls['author']"></td>
+                  <td><input type="text" id="author" placeholder="{{newBookInfo.author}}"  [(ngModel)]="newBookInfo.author" [formControl]="bookInfoFormGroup.controls['author']"></td>
                 </tr>
                 <tr>
                     <td><label for="price">价格:</label></td>
-                    <td><input type="text" id="price" placeholder="{{newBookInfo.price}}" [(ngModel)]="newBookInfo.price" [formControl]="myForm.controls['price']"></td>
+                    <td><input type="text" id="price" placeholder="{{newBookInfo.price}}" [(ngModel)]="newBookInfo.price" [formControl]="bookInfoFormGroup.controls['price']"></td>
                   </tr>
                 <tr>
-                    <button type="submit">新增</button>
+                 <tr>
+                      <td><input type="text" id="groupid" placeholder="{{groupId}}" [(ngModel)]="groupId" [formControl]="bookInfoFormGroup.controls['groupid']" hidden="true"></td>
                 </tr>
+                    <tr>
+                    <button type="submit">新增</button>
+                   </tr>
               </form>
             </div>
       </ng-template>

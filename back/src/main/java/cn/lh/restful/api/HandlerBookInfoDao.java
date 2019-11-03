@@ -24,8 +24,12 @@ public class HandlerBookInfoDao {
                 resList.add(bookInfo);
             }else{
                 BookInfo parentBookInfo = bookInfoMap.get(bookInfo.getGroupid());
-                bookInfo.setLevel(parentBookInfo.getLevel() + 1);
-                parentBookInfo.addBookInfo(bookInfo);
+                if(parentBookInfo != null) {
+                    parentBookInfo.addBookInfo(bookInfo);
+                }else{
+                    resList.add(bookInfo);
+                }
+
             }
         }
         return gson.toJson(resList);
@@ -45,14 +49,13 @@ public class HandlerBookInfoDao {
 
     public static String addBookInfo(String message){
         BookInfo bookInfo = gson.fromJson(message, BookInfo.class);
-        BookInfo book = new BookInfo();
-        book.setId(bookInfo.getId());
-        book.setAuthor(bookInfo.getAuthor());
-        book.setName(bookInfo.getName());
-        book.setPrice(bookInfo.getPrice());
-        book.setGroupid(bookInfo.getGroupid());
-        book.setLevel(book.getLevel() + 1);
-        if(DbDaoService.getBookInfo(book.getId()) == null){
+        BookInfo groupInfo = DbDaoService.getBookInfo(bookInfo.getGroupid());
+        if(groupInfo == null){
+            bookInfo.setLevel(0);
+        }else{
+            bookInfo.setLevel(groupInfo.getLevel() + 1);
+        }
+        if(DbDaoService.getBookInfo(bookInfo.getId()) == null){
             DbDaoService.addBookInfo(bookInfo);
             return "sucess insert book into database";
         }else{

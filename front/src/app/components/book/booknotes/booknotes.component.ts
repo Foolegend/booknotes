@@ -14,26 +14,26 @@ import { BookInfoService } from '../../book-info.service';
 export class BookNotesComponent implements OnInit {
   @ViewChild('matMenuTrigger') mainMenu: MatMenuTrigger;
 
-  myForm: FormGroup;
+  bookInfoFormGroup: FormGroup;
   bookInfo: any;
+  groupId:any;
   newBookInfo: any;
   isadd: boolean = false;
   headers: Headers;
   options: RequestOptions;
   groupBookinfolist: any[];
   isOpen: boolean = true;
-  isGroupOpen: Boolean[] = new Array<Boolean>();
   arrow: String="keyboard_arrow_down";
-  arrowGroup: String[] = new Array<String>();
   typesOfModule: String[]=["ceshi", "lishi", "hehe","budong","qiguai"];
   precent: number[] = new Array<number>();
 
   constructor(private http: Http, fb: FormBuilder,private router: Router, private bookInfoService: BookInfoService) {
-    this.myForm = fb.group({
+    this.bookInfoFormGroup = fb.group({
       'name':'',
       'id' :'',
       'author':'',
-      'price' : ''
+      'price' : '',
+      'groupid':''
     }); 
     this.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }); 
     this.options = new RequestOptions({ headers: this.headers });
@@ -47,17 +47,17 @@ export class BookNotesComponent implements OnInit {
       console.log(res.json())
       this.groupBookinfolist = res.json();
       console.log(res.json())
-      for(var i = 0; i < this.groupBookinfolist.length; i++){
-        this.arrowGroup[i] = "keyboard_arrow_down";
-        this.isGroupOpen[i] = true;
-      }
     });
 
   }
 
   setBookInfo(bookInfo: any){
+    console.log("jinlai")
+    console.log(bookInfo);
+    console.log("jinlai1")
     this.isadd=false;
     this.bookInfo = bookInfo;
+    this.groupId = bookInfo.id;
   }
 
 
@@ -86,6 +86,9 @@ export class BookNotesComponent implements OnInit {
   }
   
   addSubNode(){
+    if(!this.bookInfo){
+       this.groupId="######";
+    }
     this.isadd = true;
   }
 
@@ -98,13 +101,18 @@ export class BookNotesComponent implements OnInit {
            }).catch(this.handleError);
   }
 
-  deleteBookInfo(value: String){
-    console.log(value);
-    return this.http.get("/api/deletebookinfo?id=" + value, this.options)
-            .toPromise().then(response =>{
-              console.log(response);
-              this.refresh();
-           }).catch(this.handleError);
+  deleteNodes(){
+    if(this.bookInfo){
+      // console.log(this.bookInfo);
+      return this.http.get("/api/deletebookinfo?id=" + this.bookInfo.id, this.options)
+              .toPromise().then(response =>{
+                console.log(response);
+                this.refresh();
+             }).catch(this.handleError);
+
+    }else{
+      alert("没有选中节点,无法删除.请先选择要删除的节点");
+    }
   }
 
   refresh(){
@@ -120,15 +128,6 @@ export class BookNotesComponent implements OnInit {
       this.arrow = "keyboard_arrow_down";
     }else{
       this.arrow = "keyboard_arrow_right";
-    }
-  }
-
-  changeGroupOpen(i: any){
-    this.isGroupOpen[i] = !this.isGroupOpen[i];
-    if(this.isGroupOpen[i]){
-      this.arrowGroup[i] = "keyboard_arrow_down";
-    }else{
-      this.arrowGroup[i] = "keyboard_arrow_right";
     }
   }
 
