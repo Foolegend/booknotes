@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-booktree',
@@ -7,15 +7,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BooktreeComponent implements OnInit {
   @Input() bookinfolist: any;
+  @Output() outBookInfo = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
   }
 
     // 点击动作
-    itemClick(i) {
-      // 建立一个服务来接收这个值, 或者借助双向绑定, 处理动作
-      i._open = i._open  // 本例只简单演示开关, 借助 treelists本身实现
-      console.log(i)
+    itemClick(bookInfo: any) {
+      // console.log("tree1");
+      // console.log(bookInfo);
+      // console.log("tree2");
+      this.outBookInfo.emit(bookInfo);
     }
 }

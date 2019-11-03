@@ -6,7 +6,7 @@
         <mat-icon>add</mat-icon></button>
       <button mat-icon-button title="删除节点" (click)="deleteNodes()" >
           <mat-icon>remove</mat-icon></button>
-        <app-booktree  [bookinfolist]="groupBookinfolist"></app-booktree>
+        <app-booktree  [bookinfolist]="groupBookinfolist" (outBookInfo)="setBookInfo($event)"></app-booktree>
   </mat-sidenav>
   <mat-sidenav-content>
       <div *ngIf="isadd==false;then modifyinfo else addinfo"></div>

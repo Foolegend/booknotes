@@ -1,7 +1,7 @@
-  <ul>
-  <li *ngFor="let bookinfo of  bookinfolist">
-    <button mat-button (click)="itemClick(bookinfo)">{{bookinfo.name}}</button>
+<div *ngFor="let bookinfo of  bookinfolist">
+  &nbsp;&nbsp;<button mat-button (click)="itemClick(bookinfo)">
+    <mat-icon>arrow_drop_down</mat-icon>
+    {{bookinfo.name}}</button>
     <!--调用组件本身并 传值给下级: [bookinfolist]="bookinfo.bookInfos"-->
-    <app-booktree *ngIf="bookinfo.bookInfos" [bookinfolist]="bookinfo.bookInfos"></app-booktree>
-  </li>
-</ul>
+    &nbsp;&nbsp;<app-booktree *ngIf="bookinfo.bookInfos" [bookinfolist]="bookinfo.bookInfos"></app-booktree>
+</div>
